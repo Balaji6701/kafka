@@ -5,6 +5,7 @@ The application consists of four servies
 - Shipping service -  exposes rest endpoints for shipping details of the processed orders and sends notification to customers.
 - Invoice service - maintains the invoice details of the processed orders.
 - **Each service will use kafka as a middleware.**
+![](kafka-architecture.jpeg)
 ## Functionalities:
 ### Cart service
 - Expose rest endpoints to add products to cart
@@ -14,6 +15,7 @@ The application consists of four servies
 - Expose rest endpoint to view order
 - Consume order messages by listening to t-order kafka topics.
 - Publish processed orders to t-processed-order topic
+- ![My Image](kafka-architecture-topics.jpeg)
 ### Shipping service
 - Expose rest endpoints to view shipping details
 - Consume order message by listening to t-processed-order topic.
