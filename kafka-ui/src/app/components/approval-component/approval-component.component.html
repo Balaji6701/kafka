@@ -1,0 +1,73 @@
+<select
+  *ngIf="products.length > 0"
+  [(ngModel)]="method"
+  class="form-select float-right"
+  aria-label="Default select example"
+>
+  <option value="Rest">Rest</option>
+  <option selected value="Kafka">Kafka</option>
+</select>
+<table class="table align-middle mb-0 bg-white" *ngIf="products.length > 0">
+  <thead class="bg-light">
+    <tr>
+      <th>Product Name</th>
+      <th>Category</th>
+      <th>Creation details</th>
+      <th>Status</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>
+        <div class="d-flex align-items-center">
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{ product.productName }}</p>
+            <p class="text-muted mb-0">{{ product.brand }}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">{{ product.productCategory }}</p>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">Created At:{{ product.createdAt | date }}</p>
+        <p class="text-muted mb-0">Created By:{{ product.createdBy }}</p>
+      </td>
+      <td>
+        <span
+          class="badge bg-{{
+            product.active ? 'success' : 'danger'
+          }} rounded-pill d-inline"
+          >{{ product.active ? "Active" : "Inactive" }}</span
+        >
+      </td>
+      <td>
+        <p class="fw-bold mb-1">
+          {{ product.price | currency: "INR":"symbol" }}
+        </p>
+      </td>
+      <td>
+        <button
+          type="button"
+          (click)="approveProduct(product.id)"
+          class="btn btn-success btn-sm btn-rounded"
+        >
+          Approve</button
+        ><br /><br />
+        <button
+          type="button"
+          (click)="rejectProduct(product.id)"
+          class="btn btn-danger btn-sm btn-rounded"
+        >
+          Reject
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-center" *ngIf="products.length == 0">
+  <h1>No products submitted for approval</h1>
+</div>
